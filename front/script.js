@@ -43,6 +43,7 @@ function loginCheckInputs({ login, password }) {
 }
 
 function logIn(formValues) {
+  const [loginInput, passwordInput] = loginForm.elements
   return fetch('/login', { method: 'POST', body: JSON.stringify(formValues) })
     .then(response => response.json())
     .then(answer => {
@@ -51,7 +52,11 @@ function logIn(formValues) {
         location.href = '/users.html'
 
       }
-      else alert(answer.error)
+      else {
+        alert(answer.error)
+        if (answer.error == 'User not found') setErrorFor(loginInput, 'User not found')
+        if (answer.error == 'Incorrect password') setErrorFor(passwordInput, 'Incorrect password')
+      }
     })
 }
 
