@@ -24,6 +24,6 @@ function showUsers() {
         .then(users => userList.innerHTML = users.map(buildUserItem).join(''))
 }
 
-let GoBack = function (){
+function goToInitScreen() {
     window.location.href = '/';
 };
